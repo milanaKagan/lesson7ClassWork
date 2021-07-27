@@ -24,6 +24,16 @@ app.get('/account', async(req, res) => {
     await history_repo.addHistoryRecord(historyRecord);
     res.status(200).json({ accounts})
 });
+app.get('/history', async(req, res) => {
+    const history = await  history_repo.getAllHistoryRecords();
+   
+    res.status(200).json({ history})
+});
+app.get('/history/:history_id', async(req, res) => {
+    const history_id = req.params.history_id
+    const history = await history_repo.getHistoryRecordById(history_id); 
+    res.status(200).json({ history})
+});
 
 app.get('/account/:account_id', async(req, res) => {
     const account_id = req.params.account_id
@@ -60,9 +70,9 @@ app.put('/account/:account_id', async(req, res) => {
     try
     {
         const account_id = req.params.account_id
-        account = req.body
-        const result = await account_repo.updateAccount(account, account_id)
+        account = req.body;
         const now = new Date();
+        const result = await account_repo.updateAccount(account, account_id);
         const historyRecord = {"method_type": "edit", "url": `localhost:8080/account/${account_id}`, "body": account, "op_timestamp": now};
         await history_repo.addHistoryRecord(historyRecord);
         res.status(201).json({
@@ -86,7 +96,7 @@ app.post('/account', async (req, res) => {
         account = req.body
         const result = await account_repo.addAccount(account)
         const now = new Date();
-        const historyRecord = {"method_type": "insert", "url": 'localhost:8080/account/', "body": account, "op_timestamp": now};
+        const historyRecord = {"method_type": "insert", "url": `localhost:8080/account/${result[0]}`, "body": account, "op_timestamp": now};
         await history_repo.addHistoryRecord(historyRecord);
         res.status(201).json({
             res: 'success',
