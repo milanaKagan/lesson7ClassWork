@@ -1,0 +1,25 @@
+{
+  "name": "lesson7ClassWork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milanaKagan/lesson7ClassWork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milanaKagan/lesson7ClassWork/issues"
+  },
+  "homepage": "https://github.com/milanaKagan/lesson7ClassWork#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.95.8",
+    "pg": "^8.6.0"
+  }
+}
